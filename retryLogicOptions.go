@@ -5,6 +5,16 @@ import (
 	"time"
 )
 
+func WithNoRetry() RetryOption {
+	return func(rl *RetryLogic) error {
+		rl.maxAttempts = 1
+		rl.delay = 0
+		rl.baseDelay = 0
+		rl.delay = 0
+		return nil
+	}
+}
+
 func WithMaxAttempts(count int32) RetryOption {
 	return func(rl *RetryLogic) error {
 		rl.maxAttempts = count
