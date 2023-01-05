@@ -25,6 +25,13 @@ func NewRetryLogic(opts ...RetryOption) (*RetryLogic, error) {
 	return rl, nil
 }
 
+// Copy returns a goroutine safe instance of the logic
+func (rl *RetryLogic) Copy() *RetryLogic {
+	newRL := &RetryLogic{}
+	*newRL = *rl
+	return newRL
+}
+
 func (rl *RetryLogic) Reset() {
 	rl.attempt = 0
 	rl.delay = rl.baseDelay
